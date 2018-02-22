@@ -1,0 +1,612 @@
+/* GENERAL STYLES */
+body{
+    font-family: 'Roboto', sans-serif;
+    min-width: 320px;
+    margin: 0px;
+    padding: 0px;
+}
+
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+h1{
+    font-size: 40px;
+	font-weight: 700;
+    color: #1e1e1e;
+    margin: 10px 0px;
+}
+
+h2{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.43;
+    color: #1e1e1e;
+}
+
+a{
+    font-size: 18px;
+    text-decoration: none;
+    color: #311b58;
+}
+
+p{
+    font-size: 18px;
+    margin: 10px 0px;
+}
+
+
+hr{
+    width: 100%;
+    height: 2px;
+    border: none;
+    background-color: #f0f0f0;
+    margin-top: 80px;
+}
+
+button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+a:active, a:focus, a:hover{
+    outline: none;
+    text-decoration: none;
+    color: #311b58;
+}
+
+div.container{
+    max-width: 1200px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+}
+
+p.subtitle{
+    font-size: 24px;
+	line-height: 1.33;
+	color: #1e1e1e;
+}
+
+.inner-container{
+    width: 74%;
+    margin: 0px auto;
+}
+
+.right{
+    text-align: right;
+}
+
+.center{
+    text-align: center;
+}
+
+section p.subtitle + .btn{
+    display: inline-block;
+    margin-top: 35px;
+}
+
+.clearfix::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+
+h1 + hr{
+    margin-top: 30px;
+}
+
+/* tablet & mobile */
+@media only screen and (max-width: 1023px){
+    .inner-container{
+        width: 90%;
+    }
+
+    hr{
+        margin-top: 50px;
+    }
+}
+
+/* END OF GENERAL STYLES */
+
+
+/* BUTTONS */
+.btn{
+    background-color: #f7296e;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    outline: none;
+    color: #ffffff;
+    padding: 12px 28px;
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.44;
+    top: 0px;
+    left: 0px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+
+.btn:hover, .btn:active, .btn:focus{
+    top: -2px;
+    left: -1px;
+    color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(60, 60, 60, 0.1);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(60, 60, 60, 0.1);
+    -moz-box-shadow: 0 4px 8px 0 rgba(60, 60, 60, 0.1);
+}
+
+.btn.btn-secondary{
+    background-color: #311b58;
+}
+
+.btn.btn-third{
+    background-color: #989898;
+}
+
+.btn.btn-small{
+    padding: 6px 16px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* END OF BUTTONS */
+
+
+/* APP-ICONS */
+.app-icon{
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+	background-color: #ffffff;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    background-color: #ffffff;
+}
+
+.app-icon img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+/* END OF APP-ICONS */
+
+/* TAGS */
+.tag{
+    font-size: 12px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 4px 13px;
+    color: #ffffff;
+    display: inline-block;
+    background-color: #f7296e;
+    text-transform: uppercase;
+}
+
+.tag.tag-version{
+    background-color: #311b58;
+}
+
+.tag.core-app{
+    background-color: #989898;
+}
+/* END OF TAGS */
+
+
+/* CARDS */
+.cards{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.cards .card-col{
+    width: 33.3%;
+    float: left;
+    margin-bottom: 33px;
+}
+
+.cards .card{
+    float: left;
+    position: relative;
+    padding: 20px;
+    margin: 0px 15px;
+    min-height: 335px;
+    text-align: left;
+	border-radius: 14px;
+	-webkitborder-radius: 14px;
+	-moz-border-radius: 14px;
+    background-color: #f4f4f4;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+}
+
+.cards .card:hover{
+    top: -4px;
+    left: -2px;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.cards .card img + span{
+    display: block;
+    margin: 30px 0px 10px 0px;
+    font-size: 14px;
+	font-weight: 500;
+	color: #f7296e;
+}
+
+.cards .card strong{
+    display: block;
+    font-size: 24px;
+	font-weight: bold;
+	line-height: 1.25;
+	text-align: left;
+	color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.cards .card img{
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 44px;
+}
+
+.cards .card .right{
+    display: block;
+    margin: 0px;
+}
+
+.cards .card .right .btn{
+    display: inline-block;
+}
+
+.cards .card .tag{
+    margin: 0px 0px 2px 0px;
+}
+
+.cards .card span.tag-wrapper{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* desktop only */
+@media only screen and (min-width: 1024px){
+    .cards .card-col.clearfix-lg{
+        clear: both;
+    }
+}
+
+/* tablet*/
+@media only screen and (max-width: 1023px) and (min-width: 640px){
+    .cards .card-col{
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    .cards .card{
+        max-width: 280px;
+    }
+
+    .cards .card-col.clearfix-md{
+        clear: both;
+    }
+}
+
+/* mobile */
+@media only screen and (max-width: 639px){
+    .cards .card-col{
+        float: none;
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .cards .card{
+        float: none;
+        display: inline-block;
+        max-width: 280px;
+    }
+}
+/* END OF CARDS */
+
+
+
+/* HEADER */
+header{
+    padding: 33px 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: transparent;
+    text-align: right;
+}
+
+header a{
+    color: #311b58;
+    display: inline-block;
+    font-weight: 500;
+    padding: 10px 0px;
+}
+
+header a.btn{
+    margin-left: 21px;
+}
+
+header a.logo{
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+header a.logo img{
+    max-width: 100%;
+}
+
+#open-menu{
+    display: none;
+}
+
+/* END OF HEADER */
+
+/* ALL APPS */
+section.all-apps{
+    text-align: center;
+    padding: 200px 0px 100px 0px;
+}
+
+section.all-apps .subtitle + .btn{
+    margin-bottom: 110px;
+}
+
+section.all-apps h2{
+    font-size: 40px;
+    font-weight: 700;
+    color: #1e1e1e;
+}
+
+/* tablet & mobile */
+@media only screen and (max-width: 1023px){
+    section.all-apps{
+        padding-bottom: 50px;
+    }
+}
+/* END OF ALL APPS */
+
+/* BOUNTY-INTRO */
+section.bounty-intro {
+    padding: 30px 0px;
+    background-image: linear-gradient(to bottom, #f1f4f7 55%, #ffffff);
+    background-image: -webkit-linear-gradient(to bottom, #f1f4f7 55%, #ffffff);
+    text-align: center;
+}
+
+section.bounty-intro h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1e1e1e;
+    margin: 10px 0px;
+    margin-top: 177px;
+}
+/* END OF BOUNTY-INTRO */
+
+/* BOUNTIES */
+section.bounties {
+  padding: 200px 0px 100px 0px;
+}
+/* END OF BOUNTIES */
+
+
+/* FOOTER */
+footer{
+    background-color: #f5f5f5;
+    padding: 68px 0px 105px 0px;
+    overflow: hidden;
+    position: relative;
+}
+
+footer::before{
+    content: " ";
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 5px;
+    width: 100%;
+    background-color: #f7296e;
+}
+
+footer .container{
+    position: relative;
+}
+
+footer .presentation{
+    float: left;
+    width: 20%;
+}
+
+footer .presentation a.logo{
+    padding: 20px 0px 10px 0px;
+}
+
+footer img{
+    display: inline-block;
+	width: 171px;
+}
+
+footer .presentation p{
+    font-size: 16px;
+	line-height: 1.5;
+    color: #1e1e1e;
+    margin-bottom: 7px;
+}
+
+footer .presentation span a{
+    font-size: 14px;
+	line-height: 2.0;
+	color: #1e1e1e;
+}
+
+footer .footer-nav{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+footer .links{
+    float: left;
+    margin-left: 125px;
+}
+
+footer .links ul{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+footer .links ul li{
+    margin-bottom: 10px
+}
+
+footer .links ul li a{
+    position: relative;
+    display: block;
+    font-size: 16px;
+	line-height: 1.5;
+    color: #1e1e1e;
+    padding: 4px 0px 4px 40px;
+}
+
+footer .links ul li img {
+    position: absolute;
+    width: 24px;
+    top:50%;
+    margin-top: -12px;
+    left: 0px;
+}
+
+/* desktop only */
+@media only screen and (min-width:1024px){
+    footer .inner-container{
+        width: initial;
+        margin: initial;
+    }
+}
+
+/* tablet & mobile */
+@media only screen and (max-width: 1023px){
+    footer{
+        padding-bottom: 58px;
+    }
+
+    footer .presentation{
+        float: none;
+        width: initial;
+    }
+
+    footer .presentation p{
+        margin-bottom: 2px;
+    }
+
+    footer .footer-nav{
+        position: static;
+    }
+
+    footer footer-nav .links:first-child{
+        margin-left: 0px;
+    }
+
+    footer .links{
+        margin: 0px;
+    }
+
+    footer .links.icons{
+        float: left;
+        width: 50%;
+    }
+
+    footer .links.menu{
+        float: none;
+        margin: 50px 0px 55px 0px;
+    }
+
+    footer .links.menu + .links{
+        margin: 0px;
+    }
+
+    footer .links.links.menu ul li a{
+        padding: 4px 0px;
+    }
+}
+/* END OF FOOTER */
+
+/* HERO-SINGLE */
+section.hero-single{
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 20px 0px 50px 0px;
+}
+
+section.hero-single .app-icon{
+    margin-top: 115px;
+}
+
+section.hero-single p + .btn{
+    margin-bottom: 50px;
+}
+
+section.hero-single .tag{
+    margin-right: 10px;
+}
+
+/* tablet & mobile */
+@media only screen and (max-width: 1023px){
+
+    section.hero-single{
+        padding-bottom: 34px;
+    }
+
+    section.hero-single .app-icon{
+        margin: 97px 0px 13px 0px;
+    }
+
+    section.hero-single p + .btn{
+        margin: 33px 0px;
+    }
+}
+
+/* END OF HERO-SINGLE */

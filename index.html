@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Æternity Bounties</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+  <script src="js/bounties.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/header.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+  <div id="app">
+    <ae-header></ae-header>
+    <main>
+      <section class="bounty-intro">
+        <div class="container">
+          <div class="inner-container">
+            <h2>Bounties</h2>
+            <p class="subtitle">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bounties">
+        <div class="container">
+          <!-- <div class="inner-container"> -->
+          <div v-if="loading">Loading</div>
+            <div id="bounties" v-if="issues.length > 0">
+              <table>
+                <thead>
+                  <tr>
+                    <th @click="setSort('title')">Title</th>
+                    <th @click="setSort('project_name')">Project</th>
+                    <th @click="setSort('state')">State</th>
+                    <th>Labels</th>
+                    <!-- <th @click="setSort('created_timestamp')">Created</th> -->
+                    <!-- <th @click="setSort('updated_timestamp')">Updated</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="issue in displayIssues">
+                    <td><a :href="issue.html_url">#{{issue.number}}</a> {{issue.title}}</td>
+                    <td>{{issue.project_name}}</td>
+                    <td>{{issue.state}}</td>
+                    <td>
+                      <span :style="{backgroundColor: '#' + label.color}" v-for="label in issue.labels">{{label.name}}</span>
+                    </td>
+                    <!-- <td>{{issue.created_at | timeAgo}}</td> -->
+                    <!-- <td>{{issue.updated_at | timeAgo}}</td> -->
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div> -->
+          </div>
+        </section>
+      </main>
+      <ae-footer></ae-footer>
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        issues: [],
+        loading: false,
+        projects: [
+          'muxe/treasure',
+          'aeternity/epoch',
+          'aeternity/aepp-components',
+          'aeternity/aepp-identity',
+          'aeternity/aepp-aexistence'
+        ],
+        sort: {
+          field: 'project_name',
+          rising: true
+        }
+      },
+      computed: {
+        displayIssues: function () {
+          // enrich fields
+          const issues = this.issues.map(issue => {
+            issue.project_name = this.getProject(issue.html_url)
+            issue.created_timestamp = moment(issue.created_at).unix()
+            issue.updated_timestamp = moment(issue.updated_at).unix()
+            return issue
+          })
+          // sort issues
+          issues.sort((a, b) => {
+            if (a[this.sort.field] < b[this.sort.field]) {
+              return this.sort.rising ? -1 : 1
+            }
+            if (a[this.sort.field] > b[this.sort.field]) {
+              return this.sort.rising ? 1 : -1
+            }
+
+            return 0
+          })
+          return issues
+        }
+      },
+      methods: {
+        updateIssues: async function () {
+          this.loading = true
+          try {
+            const options = {
+              combine: true,
+              // state: 'open',
+              // labels: ['bounty'],
+              labels: [],
+              projects: this.projects
+            }
+            const issues = await queryProjects(options)
+            this.issues = issues
+          } catch (e) {
+            console.log(e)
+          } finally {
+            this.loading = false
+          }
+        },
+        getProject: function (value) {
+          const regex = /github\.com\/([^\/]+\/[^\/]+)/g
+          const matches = regex.exec(value)
+          if (matches && matches.length > 1) {
+            return matches[1]
+          }
+          return ''
+        },
+        setSort: function (field) {
+          if (this.sort.field === field) {
+            this.sort.rising = !this.sort.rising
+          } else {
+            this.sort.rising = true
+          }
+          this.sort.field = field
+        }
+      },
+      mounted () {
+        this.updateIssues()
+      },
+      filters: {
+        timeAgo: function (value) {
+          return moment(value).fromNow()
+        }
+      }
+    })
+  </script>
+</body>
+</html>
