@@ -28,10 +28,11 @@
 
       <section class="bounties">
         <div class="container">
+          <input type="text" v-model="filter" placeholder="filter"></input>
           <!-- <div class="inner-container"> -->
           <div v-if="loading">Loading</div>
             <div id="bounties" v-if="issues.length > 0">
-              <table>
+              <table class="bounties">
                 <thead>
                   <tr>
                     <th @click="setSort('title')">Title</th>
@@ -44,11 +45,12 @@
                 </thead>
                 <tbody>
                   <tr v-for="issue in displayIssues">
-                    <td><a :href="issue.html_url">#{{issue.number}}</a> {{issue.title}}</td>
+                    <!-- <td><a :href="issue.html_url">#{{issue.number}}</a> {{issue.title}}</td> -->
+                    <td><a :href="issue.html_url">{{issue.title}}</a></td>
                     <td>{{issue.project_name}}</td>
                     <td>{{issue.state}}</td>
                     <td>
-                      <span :style="{backgroundColor: '#' + label.color}" v-for="label in issue.labels">{{label.name}}</span>
+                      <span v-for="label in issue.labels">{{label.name}}</span>
                     </td>
                     <!-- <td>{{issue.created_at | timeAgo}}</td> -->
                     <!-- <td>{{issue.updated_at | timeAgo}}</td> -->
@@ -79,17 +81,26 @@
         sort: {
           field: 'project_name',
           rising: true
-        }
+        },
+        filter: ''
       },
       computed: {
         displayIssues: function () {
           // enrich fields
-          const issues = this.issues.map(issue => {
+          let issues = this.issues.map(issue => {
             issue.project_name = this.getProject(issue.html_url)
             issue.created_timestamp = moment(issue.created_at).unix()
             issue.updated_timestamp = moment(issue.updated_at).unix()
             return issue
           })
+          // filter issues
+          if (this.filter && this.filter !== '') {
+            issues = issues.filter(issue => {
+              const filter = this.filter.toLowerCase()
+              return issue.project_name.toLowerCase().includes(this.filter) ||
+                issue.title.toLowerCase().includes(this.filter)
+            })
+          }
           // sort issues
           issues.sort((a, b) => {
             if (a[this.sort.field] < b[this.sort.field]) {
@@ -124,7 +135,7 @@
           }
         },
         getProject: function (value) {
-          const regex = /github\.com\/([^\/]+\/[^\/]+)/g
+          const regex = /github\.com\/[^\/]+\/([^\/]+)/g
           const matches = regex.exec(value)
           if (matches && matches.length > 1) {
             return matches[1]
