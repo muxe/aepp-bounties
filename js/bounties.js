@@ -18,7 +18,7 @@ const queryProjects = async (options) => {
       return result.data
     })
     if (combine) {
-      console.log(JSON.stringify([].concat(...resultDatas), null, 2))
+      // console.log(JSON.stringify([].concat(...resultDatas), null, 2))
       return [].concat(...resultDatas)
     } else {
       return resultDatas

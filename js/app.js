@@ -5,6 +5,14 @@ var app = new Vue({
     loading: false,
     projects: [
       'muxe/treasure',
+      'aeternity/aepp-sdk-js',
+      'aeternity/aepp-sdk-python',
+      'aeternity/protocol',
+      'aeternity/aepp-blockchain-explorer',
+      'aeternity/aepp-voting',
+      'aeternity/aepp-wall',
+      'aeternity/aepp-response',
+      'aeternity/id-manager-provider',
       'aeternity/epoch',
       'aeternity/aepp-components',
       'aeternity/aepp-identity',
@@ -18,8 +26,10 @@ var app = new Vue({
   },
   computed: {
     displayIssues: function () {
+      // remove PRs
+      let issues = this.issues.filter(issue => issue.pull_request === undefined)
       // enrich fields
-      let issues = this.issues.map(issue => {
+      issues = issues.map(issue => {
         issue.project_name = this.getProject(issue.html_url)
         issue.created_timestamp = moment(issue.created_at).unix()
         issue.updated_timestamp = moment(issue.updated_at).unix()

@@ -8,10 +8,6 @@
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-  <script src="js/bounties.js"></script>
-  <script src="js/footer.js"></script>
-  <script src="js/header.js"></script>
-  <script src="js/bounty-item.js"></script>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
@@ -29,52 +25,29 @@
 
       <section class="bounties">
         <div class="container">
-          <input type="text" v-model="filter" placeholder="filter"></input>
-          <div class="flex">
+          <div v-if="loading" class="loading">
+            Loading
+          </div>
+
+          <div v-if="!loading && issues.length > 0" class="flex">
               <bounty-item v-for="issue in displayIssues" :issue="issue"></bounty-item>
+          </div>
+
+          <div v-if="!loading && issues.length <= 0" class="empty">
+            Currently there are no bounties :(
           </div>
         </div>
       </section>
 
-      <section class="bounties">
-        <div class="container">
-          <input type="text" v-model="filter" placeholder="filter"></input>
-          <!-- <div class="inner-container"> -->
-          <div v-if="loading">Loading</div>
-            <div id="bounties" v-if="issues.length > 0">
-              <table class="bounties">
-                <thead>
-                  <tr>
-                    <th @click="setSort('title')">Title</th>
-                    <th @click="setSort('project_name')">Project</th>
-                    <th @click="setSort('state')">State</th>
-                    <th>Labels</th>
-                    <!-- <th @click="setSort('created_timestamp')">Created</th> -->
-                    <!-- <th @click="setSort('updated_timestamp')">Updated</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="issue in displayIssues">
-                    <!-- <td><a :href="issue.html_url">#{{issue.number}}</a> {{issue.title}}</td> -->
-                    <td><a :href="issue.html_url">{{issue.title}}</a></td>
-                    <td>{{issue.project_name}}</td>
-                    <td>{{issue.state}}</td>
-                    <td>
-                      <span v-for="label in issue.labels">{{label.name}}</span>
-                    </td>
-                    <!-- <td>{{issue.created_at | timeAgo}}</td> -->
-                    <!-- <td>{{issue.updated_at | timeAgo}}</td> -->
-                  </tr>
-                </tbody>
-              </table>
-            <!-- </div> -->
-          </div>
-        </section>
       </main>
       <ae-footer></ae-footer>
     </div>
   </div>
 
+  <script src="js/bounties.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/bounty-item.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
